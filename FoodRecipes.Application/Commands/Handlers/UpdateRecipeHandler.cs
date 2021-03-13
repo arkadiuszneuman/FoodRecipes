@@ -32,8 +32,12 @@ namespace FoodRecipes.Application.Commands.Handlers
             
             _recipeRepository.UpdateRecipe(recipe);
             await _recipeRepository.SaveAsync();
-            
+
             scope.Complete();
+            
+            //we can have an event here (e.g. RecipeUpdated) that will execute handlers
+            //(in memory of by queue (RabbitMQ, ServiceBus, Kafka), where we can create
+            //projections of Recipe table (of course only if performance is an issue)
             
             return CommandResult.Ok;
         }

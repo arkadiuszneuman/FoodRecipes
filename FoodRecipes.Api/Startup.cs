@@ -24,6 +24,8 @@ namespace FoodRecipes.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //I commented that temporary, but we can use it to have authorization/authentication by Azure B2C.
+            //Of course we can decide to have different or our identity app.
             // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             //     .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAdB2C"));
 
@@ -49,6 +51,8 @@ namespace FoodRecipes.Api
 
             app.UseRouting();
 
+            //I commented that temporary, but we can use it to have authorization/authentication by Azure B2C.
+            //Of course we can decide to have different or our identity app.
             // app.UseAuthentication();
             // app.UseAuthorization();
 
