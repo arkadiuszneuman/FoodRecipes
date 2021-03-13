@@ -46,8 +46,10 @@ namespace FoodRecipes.Application.Commands.Handlers
         /// <returns></returns>
         private async Task ArchiveOldRecipeAsync(Recipe recipe)
         {
-            //we should duplicate recipe and it's steps here
-            //I did some temporary hax to save id and then restore it
+            //We should duplicate recipe and it's steps here.
+            //I did some temporary hax to save id and then restore it.
+            //We can create different table where archive will be persisted.
+            //We can use EventStorming to have whole history
             var oldId = recipe.Id;
             
             recipe.IsArchived = true;

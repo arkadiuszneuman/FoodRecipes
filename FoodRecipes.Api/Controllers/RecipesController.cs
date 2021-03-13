@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FoodRecipes.Application.Commands;
 using FoodRecipes.Application.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,6 +37,8 @@ namespace FoodRecipes.Api.Controllers
         [Route("{id:Guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        //we can have roles to each endpoint
+        // [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> UpdateRecipe(Guid id, [FromBody] UpdateRecipe updateRecipe, CancellationToken cancellationToken)
         {
             var updateRecipeCommand = updateRecipe with {Id = id};
