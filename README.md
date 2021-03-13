@@ -8,3 +8,5 @@
 - DDD
 - published date as offset
 - EventSourcing
+- Swagger
+- DDD

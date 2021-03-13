@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using FoodRecipes.Application.Queries;
@@ -21,5 +22,10 @@ namespace FoodRecipes.Api.Controllers
         [HttpGet]
         public Task<IEnumerable<GetRecipesQueryResult>> Get([FromQuery]GetRecipesQuery query, CancellationToken cancellationToken) =>
             _mediator.Send(query, cancellationToken);
+        
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public Task<GetRecipeQueryResult> GetById(Guid id, CancellationToken cancellationToken) =>
+            _mediator.Send(new GetRecipeByIdQuery(id), cancellationToken);
     }
 }

@@ -9,6 +9,7 @@ namespace FoodRecipes.Application.Queries
         public Guid Id { get; init; }
         public string RecipeName { get; init; }
         public string Country { get; init; }
+        public DateTimeOffset PublishedDate { get; init; }
     }
 
     public class GetRecipesQuery : IRequest<IEnumerable<GetRecipesQueryResult>>

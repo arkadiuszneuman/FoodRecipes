@@ -10,7 +10,7 @@ namespace FoodRecipes.Infrastructure.Persistence.Models
         /// (but it can be good to have for table with ingredients names in case of multilanguage app)
         /// </summary>
         public string Name { get; set; }
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
         public UnitOfMeasure UnitOfMeasure { get; set; }
     }
 }
