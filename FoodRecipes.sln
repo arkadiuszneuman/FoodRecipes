@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodRecipes", "FoodRecipes\FoodRecipes.csproj", "{9CF183A3-58A0-4586-8A57-83D1BCF33A95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodRecipes", "FoodRecipes.Api\FoodRecipes.Api.csproj", "{9CF183A3-58A0-4586-8A57-83D1BCF33A95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

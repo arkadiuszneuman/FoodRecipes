@@ -1,6 +1,6 @@
 using System;
 
-namespace FoodRecipes
+namespace FoodRecipes.Api
 {
     public class WeatherForecast
     {
