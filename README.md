@@ -10,3 +10,4 @@
 - EventSourcing
 - Swagger
 - DDD
+- Database indexes/unique indexes
