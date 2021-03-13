@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using FoodRecipes.Application.Queries;
 using MediatR;
@@ -18,7 +19,7 @@ namespace FoodRecipes.Api.Controllers
         }
 
         [HttpGet]
-        public Task<GetRecipesQueryResult> Get([FromQuery]GetRecipesQuery query, CancellationToken cancellationToken) =>
+        public Task<IEnumerable<GetRecipesQueryResult>> Get([FromQuery]GetRecipesQuery query, CancellationToken cancellationToken) =>
             _mediator.Send(query, cancellationToken);
     }
 }

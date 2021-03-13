@@ -9,6 +9,10 @@ namespace FoodRecipes.Infrastructure.Persistence
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<RecipientStep> RecipientSteps { get; set; }
+
+        public FoodRecipesContext(DbContextOptions<FoodRecipesContext> contextOptions) : base(contextOptions)
+        {
+        }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

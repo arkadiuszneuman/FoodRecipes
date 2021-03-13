@@ -1,14 +1,25 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
+using FoodRecipes.Application.Mappers;
+using FoodRecipes.Infrastructure.Repositories;
 using MediatR;
 
 namespace FoodRecipes.Application.Queries.Handlers
 {
-    public class GetRecipesQueryHandler : IRequestHandler<GetRecipesQuery, GetRecipesQueryResult>
+    public class GetRecipesQueryHandler : IRequestHandler<GetRecipesQuery, IEnumerable<GetRecipesQueryResult>>
     {
-        public async Task<GetRecipesQueryResult> Handle(GetRecipesQuery request, CancellationToken cancellationToken)
+        private readonly IRecipeRepository _recipeRepository;
+
+        public GetRecipesQueryHandler(IRecipeRepository recipeRepository)
         {
-            return new GetRecipesQueryResult();
+            _recipeRepository = recipeRepository;
+        }
+        
+        public async Task<IEnumerable<GetRecipesQueryResult>> Handle(GetRecipesQuery request, CancellationToken cancellationToken)
+        {
+            var recipes = await _recipeRepository.GetRecipes(request.Page, request.ItemsPerPage);
+            return recipes.MapToGetRecipesQueryResult();
         }
     }
 }

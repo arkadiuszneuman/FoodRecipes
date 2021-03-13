@@ -1,15 +1,19 @@
-﻿using MediatR;
+﻿using System;
+using System.Collections.Generic;
+using MediatR;
 
 namespace FoodRecipes.Application.Queries
 {
     public class GetRecipesQueryResult
     {
-        public string Products { get; set; } = "products";
+        public Guid Id { get; init; }
+        public string RecipeName { get; init; }
+        public string Country { get; init; }
     }
 
-    public class GetRecipesQuery : IRequest<GetRecipesQueryResult>
+    public class GetRecipesQuery : IRequest<IEnumerable<GetRecipesQueryResult>>
     {
-        public int Page { get; set; } = 1;
-        public int ItemsPerPage { get; set; } = 10;
+        public int Page { get; init; } = 1;
+        public int ItemsPerPage { get; init; } = 10;
     }
 }

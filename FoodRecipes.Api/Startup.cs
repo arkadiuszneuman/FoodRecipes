@@ -1,3 +1,4 @@
+using FoodRecipes.Api.CompositionRoots;
 using FoodRecipes.Application.Queries;
 using FoodRecipes.Infrastructure.Persistence;
 using MediatR;
@@ -28,9 +29,10 @@ namespace FoodRecipes.Api
 
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "FoodRecipes", Version = "v1"}); });
-            services.AddMediatR(typeof(GetRecipesQuery));
-            services.AddDbContext<FoodRecipesContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("FoodRecipesDatabase")));
+            
+            services
+                .AddApplication()
+                .AddInfrastructure(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
