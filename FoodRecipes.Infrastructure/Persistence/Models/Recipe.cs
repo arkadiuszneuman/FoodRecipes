@@ -11,5 +11,7 @@ namespace FoodRecipes.Infrastructure.Persistence.Models
         public Country Country { get; set; }
         public DateTimeOffset PublishedDate { get; set; }
         public List<RecipientStep> Steps { get; set; }
+        public bool IsArchived { get; set; }
+        public DateTimeOffset ArchiveDate { get; set; }
     }
 }

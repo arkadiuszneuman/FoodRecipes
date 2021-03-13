@@ -4,7 +4,7 @@ using MediatR;
 
 namespace FoodRecipes.Application.Commands
 {
-    public record UpdateRecipe : IRequest
+    public record UpdateRecipe : IRequest<ICommandResult>
     {
         public Guid Id { get; init; }
         public string RecipeName { get; init; }

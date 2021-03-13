@@ -22,22 +22,25 @@ namespace FoodRecipes.Api.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public Task<IEnumerable<GetRecipesQueryResult>> Get([FromQuery] GetRecipesQuery query, CancellationToken cancellationToken) =>
             _mediator.Send(query, cancellationToken);
 
         [HttpGet]
         [Route("{id:Guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public Task<GetRecipeQueryResult> GetById(Guid id, CancellationToken cancellationToken) =>
             _mediator.Send(new GetRecipeByIdQuery(id), cancellationToken);
 
         [HttpPost]
         [Route("{id:Guid}")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateRecipe(Guid id, [FromBody] UpdateRecipe updateRecipe, CancellationToken cancellationToken)
         {
             var updateRecipeCommand = updateRecipe with {Id = id};
-            await _mediator.Send(updateRecipeCommand, cancellationToken);
-            return CreatedAtAction(nameof(GetById), new { id = id }, updateRecipeCommand);
+            var result = await _mediator.Send(updateRecipeCommand, cancellationToken);
+            return new StatusCodeResult((int)result.StatusCode);     
         }
     }
 }
