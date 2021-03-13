@@ -13,5 +13,6 @@ namespace FoodRecipes.Infrastructure.Persistence.Models
         public List<RecipientStep> Steps { get; set; }
         public bool IsArchived { get; set; }
         public DateTimeOffset ArchiveDate { get; set; }
+        public int Rate { get; set; }
     }
 }

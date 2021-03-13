@@ -11,7 +11,7 @@ namespace FoodRecipes.Infrastructure.Persistence.Models
         /// (in case of byte, it must be lower than 256)
         /// </summary>
         public byte Order { get; set; }
-
+        public string PhotoUrl { get; set; }
         public string Description { get; set; }
         public List<Ingredient> Ingredients { get; set; }
     }
