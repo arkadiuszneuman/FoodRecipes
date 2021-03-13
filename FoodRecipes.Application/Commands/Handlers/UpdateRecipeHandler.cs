@@ -51,6 +51,7 @@ namespace FoodRecipes.Application.Commands.Handlers
             var oldId = recipe.Id;
             
             recipe.IsArchived = true;
+            //we should have some kind of DateTimeHelper, which we can inject to this class
             recipe.ArchiveDate = DateTimeOffset.Now;
             recipe.Id = Guid.NewGuid();
 
