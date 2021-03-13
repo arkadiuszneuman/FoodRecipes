@@ -17,7 +17,7 @@ namespace FoodRecipes.Application.Queries.Handlers
 
         public async Task<GetRecipeQueryResult> Handle(GetRecipeByIdQuery request, CancellationToken cancellationToken)
         {
-            var recipe = await _recipeRepository.GetRecipeById(request.Id);
+            var recipe = await _recipeRepository.GetRecipeByIdAsync(request.Id);
             return recipe.MapToGetRecipeQueryResult();
         }
     }

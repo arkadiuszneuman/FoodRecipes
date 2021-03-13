@@ -10,12 +10,12 @@ namespace FoodRecipes.Infrastructure.Repositories
 {
     public interface IRecipeRepository
     {
-        Task<List<Recipe>> GetRecipes(int page, int itemsPerPage);
-        Task<Recipe> GetRecipeById(Guid id);
-        void InsertRecipe(Recipe recipe);
-        void DeleteRecipe(Guid recipeId);
+        Task<List<Recipe>> GetRecipesAsync(int page, int itemsPerPage);
+        Task<Recipe> GetRecipeByIdAsync(Guid id);
+        Task InsertRecipeAsync(Recipe recipe);
+        Task DeleteRecipeAsync(Guid recipeId);
         void UpdateRecipe(Recipe recipe);
-        void Save();
+        Task SaveAsync();
     }
 
     /// <summary>
@@ -30,7 +30,7 @@ namespace FoodRecipes.Infrastructure.Repositories
             _context = context;
         }
 
-        public Task<List<Recipe>> GetRecipes(int page, int itemsPerPage)
+        public Task<List<Recipe>> GetRecipesAsync(int page, int itemsPerPage)
         {
             //we can get recipes by EF:
             
@@ -41,6 +41,7 @@ namespace FoodRecipes.Infrastructure.Repositories
             //     .AsNoTracking()
             //     .Include(x => x.Country)
             //     .Skip(page * itemsPerPage).Take(itemsPerPage)
+            //     .Where(x => !x.IsArchived)
             //     .ToListAsync();
             
             //or by dapper to be a little bit faster
@@ -76,7 +77,7 @@ namespace FoodRecipes.Infrastructure.Repositories
             });
         }
 
-        public Task<Recipe> GetRecipeById(Guid id)
+        public Task<Recipe> GetRecipeByIdAsync(Guid id)
         {
             // return _context.Recipes
             //     .Include(x => x.Country)
@@ -164,25 +165,18 @@ namespace FoodRecipes.Infrastructure.Repositories
             });
         }
 
-        public void InsertRecipe(Recipe recipe)
-        {
-            _context.Recipes.Add(recipe);
-        }
+        public async Task InsertRecipeAsync(Recipe recipe) => 
+            await _context.Recipes.AddAsync(recipe);
 
-        public void DeleteRecipe(Guid recipeId)
+        public async Task DeleteRecipeAsync(Guid recipeId)
         {
-            var recipe = _context.Recipes.Find(recipeId);
+            var recipe = await _context.Recipes.FindAsync(recipeId);
             _context.Recipes.Remove(recipe);
         }
 
-        public void UpdateRecipe(Recipe recipe)
-        {
+        public void UpdateRecipe(Recipe recipe) => 
             _context.Entry(recipe).State = EntityState.Modified;
-        }
 
-        public void Save()
-        {
-            _context.SaveChanges();
-        }
+        public Task SaveAsync() => _context.SaveChangesAsync();
     }
 }

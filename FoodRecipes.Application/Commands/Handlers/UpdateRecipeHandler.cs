@@ -18,14 +18,14 @@ namespace FoodRecipes.Application.Commands.Handlers
 
         protected override async Task Handle(UpdateRecipe request, CancellationToken cancellationToken)
         {
-            var recipe = await _recipeRepository.GetRecipeById(request.Id);
+            var recipe = await _recipeRepository.GetRecipeByIdAsync(request.Id);
             if (recipe == null)
                 throw new RecipeDoesNotExistException(request.Id);
             
             request.MapToRecipe(recipe);
             
             _recipeRepository.UpdateRecipe(recipe);
-            _recipeRepository.Save();
+            _recipeRepository.SaveAsync();
         }
     }
 }
